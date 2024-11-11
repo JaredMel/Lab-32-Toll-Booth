@@ -19,7 +19,7 @@ int main()
     for (size_t i = 0; i < NUM_LANES; i++)
     {
         cout << "Lane " << i+1 << ":" << endl;
-        for (size_t i = 0; i < SIZE; i++)
+        for (size_t j = 0; j < SIZE; j++)
         {
             lanes[i].push_back(Car());
             cout << "   ";
@@ -37,34 +37,43 @@ int main()
         {
             prob = rand() % 100 + 1;
 
-            if (prob <= 45)
+            if (prob <= 46 && !lanes[i].empty())
             {
                 cout << "Lane: " << i+1 << " Paid: ";
                 lanes[i].front().print();
                 lanes[i].pop_front();
                 prob = rand() % 100 + 1;
             }
-            if (prob <= 55)
+            if (prob <= 39)
             {
                 lanes[i].push_back(Car());
-                cout << "Lane: " << i+1 << "Joined: ";
+                cout << "Lane: " << i+1 << " Joined: ";
                 lanes[i].back().print();
                 prob = rand() % 100 + 1;
             }
+            if (prob <= 15 && !lanes[i].empty())
+            {
+                /* code */
+            }
+            
         }
 
-        cout << "Queue:" << endl;
-        if (!line.empty())
+        for (size_t i = 0; i < NUM_LANES; i++)
         {
-            for (size_t i = 0; i < line.size(); i++)
+            cout << "Lane " << i+1  << " Queue:" << endl;
+
+            if (!lanes[i].empty())
             {
-                cout << "   ";
-                line[i].print();
+                for (size_t j = 0; j < lanes[i].size(); j++)
+                {
+                    cout << "   ";
+                    lanes[i][j].print();
+                }
             }
-        }
-        else
-        {
-            cout << "   Empty" << endl;
+            else
+            {
+                cout << "   Empty" << endl;
+            }
         }
     }
 }
