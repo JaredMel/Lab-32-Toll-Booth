@@ -9,35 +9,50 @@ const int CYCLES = 6;
 int main()
 {
     deque<Car> line;
+    int count = 0;
 
     cout << "Initial queue :" << endl;
     for (size_t i = 0; i < SIZE; i++)
     {
         line.push_back(Car());
-        cout << "   [" << line.back().getYear() << " " << line.back().getMake() << " (" << line.back().getTransponder() << ")]" << endl;
+        cout << "   ";
+        line.back().print();
     }
     cout << endl;
     
-    for (size_t i = 0; i < CYCLES; i++)
+    while(!line.empty())
     {
+        count++;
         int prob = rand() % 100 + 1;
-        cout << "Time: " << i+1 << " Operation: ";
+        cout << "Time: " << count << endl;
 
         if (prob <= 55)
         {
             line.push_back(Car());
-            cout << "Joined lane: [" << line.back().getYear() << " " << line.back().getMake() << " (" << line.back().getTransponder() << ")]" << endl;
+            cout << "Operation: Joined lane: ";
+            line.back().print();
+            prob = rand() % 100 + 1;
         }
-        else if (prob <= 45)
+        else if (prob <= 45 && !line.empty())
         {
-            cout << "Car paid: [" << line.front().getYear() << " " << line.front().getMake() << " (" << line.front().getTransponder() << ")]" << endl;
+            cout << "Operation: Car paid: ";
+            line.front().print();
             line.pop_front();
+            prob = rand() % 100 + 1;
         }
 
         cout << "Queue:" << endl;
-        for (size_t i = 0; i < line.size(); i++)
+        if (!line.empty())
         {
-            cout << "   " << line[i].print() << endl;
+            for (size_t i = 0; i < line.size(); i++)
+            {
+                cout << "   ";
+                line[i].print();
+            }
+        }
+        else
+        {
+            cout << "   Empty" << endl;
         }
     }
 }
