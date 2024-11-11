@@ -4,7 +4,6 @@
 using namespace std;
 
 const int SIZE = 2;
-const int CYCLES = 6;
 
 int main()
 {
@@ -26,18 +25,18 @@ int main()
         int prob = rand() % 100 + 1;
         cout << "Time: " << count << endl;
 
+        if (prob <= 45)
+        {
+            cout << "Operation: Car paid: ";
+            line.front().print();
+            line.pop_front();
+            prob = rand() % 100 + 1;
+        }
         if (prob <= 55)
         {
             line.push_back(Car());
             cout << "Operation: Joined lane: ";
             line.back().print();
-            prob = rand() % 100 + 1;
-        }
-        else if (prob <= 45 && !line.empty())
-        {
-            cout << "Operation: Car paid: ";
-            line.front().print();
-            line.pop_front();
             prob = rand() % 100 + 1;
         }
 
